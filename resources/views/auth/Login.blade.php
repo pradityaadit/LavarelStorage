@@ -35,7 +35,7 @@
         </div>
         @endif
 
-        <p class="mt-4 text-gray-700">Belum punya akun? <a href="{{ route('register.form') }}" class="text-blue-500 hover:underline">Daftar di sini</a></p>
+        <p class="mt-4 text-gray-700">Belum punya akun? <a href="{{ route('register.form') }}" class="text-blue-500 font-bold hover:underline">Daftar di sini</a></p>
     </div>
 </body>
 

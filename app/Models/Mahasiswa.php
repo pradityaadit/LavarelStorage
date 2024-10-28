@@ -9,7 +9,11 @@ class Mahasiswa extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'mahasiswas'; // Nama tabel di database
+    protected $table = 'mahasiswas';
+
+    protected $primaryKey = 'nim'; // Atur nim sebagai primary key
+
+    public $incrementing = false; // Atur ke false jika nim bukan angka dan tidak auto-increment
 
     protected $fillable = [
         'nim',
@@ -17,14 +21,12 @@ class Mahasiswa extends Authenticatable
         'jurusan',
         'no_hp',
         'password',
+        'is_admin',
+        'is_visible', // Tambahkan kolom ini
     ];
 
-    protected $primaryKey = 'nim'; // Tentukan bahwa 'nim' adalah primary key
-    public $incrementing = false;   // Karena 'nim' adalah string, nonaktifkan auto-increment
-    protected $keyType = 'string';  // Tentukan tipe primary key sebagai string
-
-    public function getAuthIdentifierName()
+    public function isAdmin()
     {
-        return 'nim'; // Gunakan 'nim' sebagai identifier untuk autentikasi
+        return $this->is_admin;
     }
 }

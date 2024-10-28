@@ -35,3 +35,5 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
 
 Route::resource('mahasiswa', MahasiswaController::class);
+
+Route::post('/mahasiswa/{nim}/toggle-visibility', [MahasiswaController::class, 'toggleVisibility'])->name('mahasiswa.toggleVisibility');

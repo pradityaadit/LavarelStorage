@@ -9,11 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
-<body class="bg-slate-900">
+<body class="bg-[#FCEFE1] ">
     @include('layouts.nav')
-    <div class="container mx-auto p-4 rounded-lg">
-        <h1 class="text-2xl font-bold mb-4 text-white">Daftar Mahasiswa</h1>
-
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4 text-slate-800 text-center">Daftar Mahasiswa</h1>
         @if (session('success'))
         <div x-data="{ show: true }" x-show="show" class="bg-green-500 text-white p-4 mb-4 rounded-lg flex justify-between items-center">
             <span>{{ session('success') }}</span>
@@ -24,31 +23,42 @@
         @endif
 
         <!-- Table Desktop View -->
-        <div class="hidden md:block">
-            <table class="min-w-full border-separate text-white">
+        <div class="hidden md:block px-40">
+            <table class="min-w-full  border-separate text-white ">
                 <thead>
-                    <tr class="bg-gray-800">
+                    <tr class="bg-gray-800  rounded-lg">
                         <th class="border px-4 py-2">NIM</th>
                         <th class="border px-4 py-2">Nama</th>
                         <th class="border px-4 py-2">Jurusan</th>
-                        <th class="border px-4 py-2">No HP</th>
                         <th class="border px-4 py-2">Foto Profil</th>
+                        @if(auth()->user()->isAdmin())
+                        <th class="border px-4 py-2">No HP</th>
                         <th class="border px-4 py-2">Aksi</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($mahasiswas as $mahasiswa)
-                    <tr class="text-center">
-                        <td class="border px-4 py-2">{{ $mahasiswa->nim }}</td>
-                        <td class="border px-4 py-2">{{ $mahasiswa->nama }}</td>
-                        <td class="border px-4 py-2">{{ $mahasiswa->jurusan }}</td>
-                        <td class="border px-4 py-2">{{ $mahasiswa->no_hp }}</td>
-                        <td class="border px-4 py-2">
+                    <tr class="text-center text-slate-800 font-awesome">
+                        <td class="border border-black px-4 py-2">{{ $mahasiswa->nim }}</td>
+                        <td class="border border-black px-4 py-2">{{ $mahasiswa->nama }}</td>
+                        <td class="border border-black px-4 py-2">{{ $mahasiswa->jurusan }}</td>
+                        <td class="border border-black px-4 py-2">
                             <img src="{{ $mahasiswa->profile_photo_path ? asset('storage/' . $mahasiswa->profile_photo_path) : asset('images/default-profile.png') }}" alt="Foto Profil" class="w-16 h-16 rounded-full mx-auto">
                         </td>
-                        <td class="border px-4 py-2">
+
+                        @if(auth()->user()->isAdmin())
+                        <td class="border border-black px-4 py-2">{{ $mahasiswa->no_hp }}</td>
+                        <td class="border border-black px-4 py-2">
                             <a href="{{ route('mahasiswa.edit', $mahasiswa->nim) }}" class="bg-green-500 hover:bg-green-400 text-white font-bold py-1 px-3 border-b-4 border-green-700 hover:border-green-500 rounded">Update</a>
                             <a href="#" class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 border-b-4 border-red-700 hover:border-red-500 rounded">Delete</a>
+                            <form action="{{ route('mahasiswa.toggleVisibility', $mahasiswa->nim) }}" method="POST" class="inline-block">
+                                @csrf
+                                <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-1 px-3 rounded">
+                                    {{ $mahasiswa->is_visible ? 'Sembunyikan' : 'Tampilkan' }}
+                                </button>
+                            </form>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
@@ -68,10 +78,22 @@
                     </div>
                 </div>
                 <p><span class="font-semibold">Jurusan:</span> {{ $mahasiswa->jurusan }}</p>
+
+                @if(auth()->user()->isAdmin())
                 <p><span class="font-semibold">No HP:</span> {{ $mahasiswa->no_hp }}</p>
+                @endif
+
                 <div class="mt-3 flex space-x-2">
+                    @if(auth()->user()->isAdmin())
                     <a href="{{ route('mahasiswa.edit', $mahasiswa->nim) }}" class="bg-green-500 hover:bg-green-400 text-white font-bold py-1 px-3 rounded">Update</a>
-                    <a href="#" class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 rounded">Delete</a>
+                    <a href="#" class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 border-b-4 border-red-700 hover:border-red-500 rounded">Delete</a>
+                    <form action="{{ route('mahasiswa.toggleVisibility', $mahasiswa->nim) }}" method="POST" class="inline-block">
+                        @csrf
+                        <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-1 px-3 rounded">
+                            {{ $mahasiswa->is_visible ? 'Sembunyikan' : 'Tampilkan' }}
+                        </button>
+                    </form>
+                    @endif
                 </div>
             </div>
             @endforeach

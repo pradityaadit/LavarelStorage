@@ -6,119 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 90%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            width: 100%;
-            background-color: #28a745;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .error-message {
-            color: red;
-            margin-bottom: 10px;
-            text-align: center;
-            /* Pusatkan pesan error */
-        }
-
-        .link {
-            text-align: center;
-            margin-top: 15px;
-        }
-    </style>
+    @vite('resources/css/app.css') <!-- Pastikan Anda menyertakan Tailwind CSS -->
 </head>
 
-<body>
-    <div class="container">
-        <h1>Register</h1>
+<body class="bg-cover bg-center h-screen flex items-center justify-center" style="background-image: url('image/img.jpg');">
+    <div class="bg-white bg-opacity-50 rounded-lg shadow-lg p-8 w-100 text-center ">
+        <h1 class="text-2xl font-semibold mb-4 text-gray-700">Register</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div>
-                <label for="nim">NIM:</label>
-                <input type="text" name="nim" required>
+
+            <div class="mb-4">
+                <label for="nim" class="block text-left text-gray-700 mb-1">NIM:</label>
+                <input type="text" name="nim" placeholder="Masukkan NIM" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
             </div>
 
-            <div>
-                <label for="nama">Nama:</label>
-                <input type="text" name="nama" required>
+            <div class="mb-4">
+                <label for="nama" class="block text-left text-gray-700 mb-1">Nama:</label>
+                <input type="text" name="nama" placeholder="Masukkan Nama" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
             </div>
 
-            <div>
-                <label for="jurusan">Jurusan:</label>
-                <input type="text" name="jurusan" required>
+            <div class="mb-4">
+                <label for="jurusan" class="block text-left text-gray-700 mb-1">Jurusan:</label>
+                <input type="text" name="jurusan" placeholder="Masukkan Jurusan" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
             </div>
 
-            <div>
-                <label for="no_hp">No HP:</label>
-                <input type="text" name="no_hp" required>
+            <div class="mb-4">
+                <label for="no_hp" class="block text-left text-gray-700 mb-1">No HP:</label>
+                <input type="text" name="no_hp" placeholder="Masukkan No HP" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
             </div>
 
-            <div>
-                <label for="password">Password:</label>
-                <input type="password" name="password" required>
+            <div class="flex gap-4">
+                <div class="mb-4">
+                    <label for="password" class="block text-left text-gray-700 mb-1">Password:</label>
+                    <input type="password" name="password" placeholder="Masukkan Password" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="password_confirmation" class="block text-left text-gray-700 mb-1">Konfirmasi Password:</label>
+                    <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required class="w-full p-2 rounded-md border border-gray-300 bg-white text-gray-800 placeholder-gray-500">
+                </div>
             </div>
 
-            <div>
-                <label for="password_confirmation">Konfirmasi Password:</label>
-                <input type="password" name="password_confirmation" required>
-            </div>
 
-            <button type="submit">Register</button>
+            <button type="submit" class="w-full bg-[#72B1D0] text-white font-semibold py-2 rounded-md hover:bg-[#3D8ED0] transition">Register</button>
 
             @if($errors->any())
-            <div class="error-message">
+            <div class="text-red-500 mt-4">
                 <strong>{{ $errors->first() }}</strong>
             </div>
             @endif
         </form>
 
-        <div class="link">
-            <p>Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a></p>
-        </div>
+        <p class="mt-4 text-gray-700">Sudah punya akun? <a href="{{ route('login') }}" class="text-blue-500 font-bold hover:underline">Masuk di sini</a></p>
     </div>
 </body>
 

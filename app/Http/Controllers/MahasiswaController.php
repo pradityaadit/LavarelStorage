@@ -8,20 +8,38 @@ use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (auth()->check()) {
+                $user = auth()->user();
+                // Debugging untuk melihat objek user
+                if ($user->isAdmin()) {
+                    return $next($request);
+                }
+            }
+            abort(403, 'Unauthorized action.');
+        })->only(['edit', 'update', 'toggleVisibility']);
+    }
+
     public function index()
     {
-        $mahasiswas = Mahasiswa::all();
+        if (auth()->user() && auth()->user()->isAdmin()) {
+            // Jika admin, ambil semua mahasiswa
+            $mahasiswas = Mahasiswa::all();
+        } else {
+            // Jika bukan admin, hanya ambil mahasiswa yang visible
+            $mahasiswas = Mahasiswa::where('is_visible', true)->get();
+        }
         return view('mahasiswa.index', compact('mahasiswas'));
     }
 
-    // Menampilkan form untuk edit mahasiswa
     public function edit($nim)
     {
         $mahasiswa = Mahasiswa::findOrFail($nim);
         return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
-    // Mengupdate data mahasiswa
     public function update(Request $request, $nim)
     {
         $request->validate([
@@ -36,9 +54,7 @@ class MahasiswaController extends Controller
         $mahasiswa->jurusan = $request->jurusan;
         $mahasiswa->no_hp = $request->no_hp;
 
-        // Upload foto profil jika ada
         if ($request->hasFile('profile_photo')) {
-            // Hapus foto lama jika ada
             if ($mahasiswa->profile_photo_path) {
                 Storage::disk('public')->delete($mahasiswa->profile_photo_path);
             }
@@ -49,5 +65,14 @@ class MahasiswaController extends Controller
         $mahasiswa->save();
 
         return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa berhasil diperbarui.');
+    }
+
+    public function toggleVisibility($nim)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($nim);
+        $mahasiswa->is_visible = !$mahasiswa->is_visible; // Toggle nilai
+        $mahasiswa->save();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Status visibilitas berhasil diperbarui.');
     }
 }
