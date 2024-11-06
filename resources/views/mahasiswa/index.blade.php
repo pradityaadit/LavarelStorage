@@ -44,7 +44,7 @@
                         <td class="border border-black px-4 py-2">{{ $mahasiswa->nama }}</td>
                         <td class="border border-black px-4 py-2">{{ $mahasiswa->jurusan }}</td>
                         <td class="border border-black px-4 py-2">
-                            <img src="{{ $mahasiswa->profile_photo_path ? asset('storage/' . $mahasiswa->profile_photo_path) : asset('images/default-profile.png') }}" alt="Foto Profil" class="w-16 h-16 rounded-full mx-auto">
+                            <img src="{{ $mahasiswa->profile_photo_path ? asset('storage/' . $mahasiswa->profile_photo_path) : asset('images/default-profile.png') }}" alt="Foto Profil" class="w-16 h-16 rounded-[10px] mx-auto">
                         </td>
 
                         @if(auth()->user()->isAdmin())

@@ -64,7 +64,7 @@
                         <div x-show="open" @click.outside="open = false" x-transition class="absolute right-0 mt-2 w-28 text-center rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="w-full  block px-3 py-2 rounded-md text-base font-medium text-center text-red-700 hover:bg-gray-50">Logout</button>

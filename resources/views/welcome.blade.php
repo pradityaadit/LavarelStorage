@@ -19,10 +19,11 @@
         <div id="particles-js" class="absolute w-full h-full z-1 top-0 left-0"></div>
         <div class="text-xs">
             <div class="text-center   ">
-                <h1 class="flex items-center text-4xl px-5 mx-7 justify-center sm:justify-start text-center pt-8 font-black lg:text-7xl m-2 font-SegoeUI text-[#120652] space-x-4">
-                    <!-- "Nama" -->
-                    <span class="lg:ml-[350px] text-7xl">Hallo, {{ auth()->user()->nama }}</span>
+                <h1 class="flex items-center text-4xl px-2 justify-center text-center pt-8 font-black lg:text-7xl m-2 font-SegoeUI text-[#120652] space-x-4 mx-auto">
+                    <!-- Nama pengguna -->
+                    <span class="text-7xl">Hallo, {{ auth()->user()->nama }}</span>
                 </h1>
+
 
                 <span class="items-center px-2 justify-center sm:justify-start text-center text-2xl pt-2 font-black lg:text-6xl m-2 font-SegoeUI text-[#120652] space-x-4">Welcome To Dashboard.</span>
                 <!--Greeting -->
