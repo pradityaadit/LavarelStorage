@@ -17,7 +17,7 @@
                 <div class="flex pr-8">
                     <!-- Logo / Brand -->
                     <div class="shrink-0 flex items-center pr-[100%]">
-                        <a href="#" class="text-xl font-bold">MyApp</a>
+                        <a href="{{ route('welcome') }}" class="text-xl font-bold text-slate-800">MyApp</a>
                     </div>
 
                     <!-- Hamburger Menu Button (Only visible on small screens) -->

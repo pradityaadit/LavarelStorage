@@ -14,7 +14,7 @@
     <div class="container mx-auto p-4">
         <h1 class="text-2xl font-bold mb-4 text-slate-800 text-center">Daftar Mahasiswa</h1>
         @if (session('success'))
-        <div x-data="{ show: true }" x-show="show" class="bg-green-500 text-white p-4 mb-4 rounded-lg flex justify-between items-center">
+        <div x-data="{ show: true }" x-show="show" class="bg-green-500 text-white p-5 mx-[165px] mb-4 rounded-lg flex justify-between items-center">
             <span>{{ session('success') }}</span>
             <button @click="show = false" class="text-white ml-4 text-2xl">
                 &times;
@@ -51,7 +51,14 @@
                         <td class="border border-black px-4 py-2">{{ $mahasiswa->no_hp }}</td>
                         <td class="border border-black px-4 py-2">
                             <a href="{{ route('mahasiswa.edit', $mahasiswa->nim) }}" class="bg-green-500 hover:bg-green-400 text-white font-bold py-1 px-3 border-b-4 border-green-700 hover:border-green-500 rounded">Update</a>
-                            <a href="#" class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 border-b-4 border-red-700 hover:border-red-500 rounded">Delete</a>
+                            <form action="{{ route('mahasiswa.destroy', $mahasiswa->nim) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-400 text-white font-bold py-1 px-3 border-b-4 border-red-700 hover:border-red-500 rounded">
+                                    Delete
+                                </button>
+                            </form>
+
                             <form action="{{ route('mahasiswa.toggleVisibility', $mahasiswa->nim) }}" method="POST" class="inline-block">
                                 @csrf
                                 <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-white font-bold py-1 px-3 rounded">

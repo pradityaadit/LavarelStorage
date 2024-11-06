@@ -44,3 +44,6 @@ Route::get('/profile', [UserProfileController::class, 'show'])->name('profile.sh
 //Route Untuk Profile
 Route::get('/profile/edit', [UserProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::post('/profile/update', [UserProfileController::class, 'update'])->name('profile.update')->middleware('auth');
+
+//Route Untuk delate
+Route::delete('/mahasiswa/{nim}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');

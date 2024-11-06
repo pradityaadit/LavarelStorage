@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Mahasiswa</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-[#FCEFE1]">
+    @include('layouts.nav')
     <div class="container mx-auto p-6">
+
         <h1 class="text-2xl font-bold mb-4 text-center">Edit Mahasiswa</h1>
 
         @if ($errors->any())

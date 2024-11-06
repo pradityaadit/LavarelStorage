@@ -44,7 +44,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                 </svg>
                             </span>
-                            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">See More</span>
+                            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Selengkapnya &rarr;</span>
                             <span class="relative invisible">Button Text</span>
                         </a>
                     </div>

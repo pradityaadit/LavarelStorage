@@ -76,4 +76,12 @@ class MahasiswaController extends Controller
 
         return redirect()->route('mahasiswa.index')->with('success', 'Status visibilitas berhasil diperbarui.');
     }
+
+    public function destroy($nim)
+    {
+        $mahasiswa = Mahasiswa::where('nim', $nim)->firstOrFail();
+        $mahasiswa->delete();
+
+        return redirect()->route('mahasiswa.index')->with('success', 'Data mahasiswa berhasil dihapus.');
+    }
 }
